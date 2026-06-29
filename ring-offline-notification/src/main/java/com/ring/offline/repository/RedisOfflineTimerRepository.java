@@ -19,7 +19,7 @@ public class RedisOfflineTimerRepository implements OfflineTimerRepository {
 	public RedisOfflineTimerRepository(StringRedisTemplate redisTemplate, RingOfflineProperties properties) {
 		this.redisTemplate = redisTemplate;
 		this.keyPrefix = properties.getRedis().getOfflineTimerKeyPrefix();
-		this.timerDuration = Duration.ofMinutes(properties.getOffline().getThresholdMinutes());
+		this.timerDuration = properties.getOffline().getThresholdDuration();
 	}
 
 	@Override

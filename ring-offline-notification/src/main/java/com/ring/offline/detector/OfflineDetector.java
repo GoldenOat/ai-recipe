@@ -42,7 +42,7 @@ public class OfflineDetector implements OfflineDetectionStrategy {
 	}
 
 	void markOfflineIfStale(DevicePresence presence) {
-		Duration threshold = Duration.ofMinutes(this.properties.getOffline().getThresholdMinutes());
+		Duration threshold = this.properties.getOffline().getThresholdDuration();
 		Instant cutoff = this.clock.instant().minus(threshold);
 		if (presence.lastSeen().isAfter(cutoff)) {
 			return;
@@ -54,8 +54,8 @@ public class OfflineDetector implements OfflineDetectionStrategy {
 		DevicePresence offline = new DevicePresence(presence.deviceId(), DeviceStatus.OFFLINE, presence.lastSeen(),
 				changedAt);
 		this.presenceRepository.save(offline);
-		log.info("[OFFLINE-DETECTOR] device={} lastSeen={} threshold={}min -> OFFLINE", presence.deviceId(),
-				presence.lastSeen(), this.properties.getOffline().getThresholdMinutes());
+		log.info("[OFFLINE-DETECTOR] device={} lastSeen={} threshold={}s -> OFFLINE", presence.deviceId(),
+				presence.lastSeen(), this.properties.getOffline().getThresholdSeconds());
 		this.statusChangePublisher.publish(new StatusChangeEvent(presence.deviceId(), DeviceStatus.ONLINE,
 				DeviceStatus.OFFLINE, changedAt));
 	}

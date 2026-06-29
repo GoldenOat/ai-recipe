@@ -2,6 +2,8 @@ package com.ring.offline.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.time.Duration;
+
 @ConfigurationProperties(prefix = "ring")
 public class RingOfflineProperties {
 
@@ -31,14 +33,18 @@ public class RingOfflineProperties {
 
 	public static class Offline {
 
-		private int thresholdMinutes = 10;
+		private int thresholdSeconds = 10;
 
-		public int getThresholdMinutes() {
-			return this.thresholdMinutes;
+		public int getThresholdSeconds() {
+			return this.thresholdSeconds;
 		}
 
-		public void setThresholdMinutes(int thresholdMinutes) {
-			this.thresholdMinutes = thresholdMinutes;
+		public void setThresholdSeconds(int thresholdSeconds) {
+			this.thresholdSeconds = thresholdSeconds;
+		}
+
+		public Duration getThresholdDuration() {
+			return Duration.ofSeconds(this.thresholdSeconds);
 		}
 
 	}

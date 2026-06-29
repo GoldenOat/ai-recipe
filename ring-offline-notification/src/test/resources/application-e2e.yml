@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:ring_offline;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    locations: classpath:db/migration-e2e
+  data:
+    redis:
+      host: localhost
+      port: 6370
+
+ring:
+  offline:
+    threshold-seconds: 10
+    sweep-interval-ms: 1000

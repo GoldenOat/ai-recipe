@@ -44,8 +44,7 @@ public class ScheduledOfflineSweep {
 
 	@Scheduled(fixedDelayString = "${ring.offline.sweep-interval-ms:60000}")
 	void sweepStaleOnlineDevices() {
-		Instant cutoff = this.clock.instant()
-			.minus(Duration.ofMinutes(this.properties.getOffline().getThresholdMinutes()));
+		Instant cutoff = this.clock.instant().minus(this.properties.getOffline().getThresholdDuration());
 		for (String deviceId : findOnlineDeviceIds()) {
 			this.presenceRepository.findById(deviceId)
 				.filter(presence -> presence.status() == DeviceStatus.ONLINE)

@@ -41,7 +41,7 @@ class OfflineDetectorTest {
 	@BeforeEach
 	void setUp() {
 		RingOfflineProperties properties = new RingOfflineProperties();
-		properties.getOffline().setThresholdMinutes(10);
+		properties.getOffline().setThresholdSeconds(600);
 		Clock clock = Clock.fixed(NOW, ZoneOffset.UTC);
 		this.offlineDetector = new OfflineDetector(this.presenceRepository, this.statusChangePublisher, properties,
 				clock);
