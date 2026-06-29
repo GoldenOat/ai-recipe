@@ -27,4 +27,12 @@ public class GlobalExceptionHandler {
 		return problemDetail;
 	}
 
+	@ExceptionHandler(DeviceNotFoundException.class)
+	public ProblemDetail handleDeviceNotFoundException(DeviceNotFoundException exception) {
+		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.getMessage());
+		problemDetail.setTitle("Device Not Found");
+		problemDetail.setProperty("deviceId", exception.getDeviceId());
+		return problemDetail;
+	}
+
 }
