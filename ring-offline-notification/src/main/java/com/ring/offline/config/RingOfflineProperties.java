@@ -11,6 +11,8 @@ public class RingOfflineProperties {
 
 	private final Notification notification = new Notification();
 
+	private final Redis redis = new Redis();
+
 	public Offline getOffline() {
 		return this.offline;
 	}
@@ -21,6 +23,10 @@ public class RingOfflineProperties {
 
 	public Notification getNotification() {
 		return this.notification;
+	}
+
+	public Redis getRedis() {
+		return this.redis;
 	}
 
 	public static class Offline {
@@ -91,6 +97,30 @@ public class RingOfflineProperties {
 
 		public void setConsoleEnabled(boolean consoleEnabled) {
 			this.consoleEnabled = consoleEnabled;
+		}
+
+	}
+
+	public static class Redis {
+
+		private String presenceKeyPrefix = "presence:";
+
+		private String offlineTimerKeyPrefix = "offline-timer:";
+
+		public String getPresenceKeyPrefix() {
+			return this.presenceKeyPrefix;
+		}
+
+		public void setPresenceKeyPrefix(String presenceKeyPrefix) {
+			this.presenceKeyPrefix = presenceKeyPrefix;
+		}
+
+		public String getOfflineTimerKeyPrefix() {
+			return this.offlineTimerKeyPrefix;
+		}
+
+		public void setOfflineTimerKeyPrefix(String offlineTimerKeyPrefix) {
+			this.offlineTimerKeyPrefix = offlineTimerKeyPrefix;
 		}
 
 	}

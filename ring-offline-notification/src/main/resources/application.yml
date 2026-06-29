@@ -35,6 +35,10 @@ management:
 ring:
   offline:
     threshold-minutes: ${RING_OFFLINE_THRESHOLD_MINUTES:10}
+    sweep-interval-ms: ${RING_OFFLINE_SWEEP_INTERVAL_MS:60000}
+  redis:
+    presence-key-prefix: ${RING_REDIS_PRESENCE_KEY_PREFIX:presence:}
+    offline-timer-key-prefix: ${RING_REDIS_OFFLINE_TIMER_KEY_PREFIX:offline-timer:}
   kafka:
     mock-enabled: ${RING_KAFKA_MOCK_ENABLED:true}
     topics:
